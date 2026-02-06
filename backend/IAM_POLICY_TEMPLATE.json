@@ -13,10 +13,10 @@
         "dynamodb:Query"
       ],
       "Resource": [
-        "arn:aws:dynamodb:*:*:table/BloodBridgeUsers",
-        "arn:aws:dynamodb:*:*:table/BloodBridgeDonations",
-        "arn:aws:dynamodb:*:*:table/BloodBridgeRequests",
-        "arn:aws:dynamodb:*:*:table/BloodBridgeMessages"
+        "arn:aws:dynamodb:us-east-1:904233124678:table/BloodBridgeUsers",
+        "arn:aws:dynamodb:us-east-1:904233124678:table/BloodBridgeDonations",
+        "arn:aws:dynamodb:us-east-1:904233124678:table/BloodBridgeRequests",
+        "arn:aws:dynamodb:us-east-1:904233124678:table/BloodBridgeMessages"
       ]
     },
     {
@@ -25,6 +25,10 @@
       "Action": [
         "sns:Publish"
       ],
+      "Resource": "arn:aws:sns:us-east-1:904233124678:sns_topic:d0354386-8de3-40fe-a949-a28c74e35a29"
+    }
+  ]
+}
       "Resource": "arn:aws:sns:*:*:*"
     }
   ]
