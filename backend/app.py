@@ -60,7 +60,7 @@ app.secret_key = os.environ.get("FLASK_SECRET_KEY", "blood_bridge_secret_key")
 # - BLOOD_REQUEST_SNS_TOPIC_ARN: SNS topic ARN for blood request notifications
 # CloudWatch environment variables removed: CLOUDWATCH_LOG_GROUP, CLOUDWATCH_LOG_STREAM
 
-AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")  # Account: 904233124678
+AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 
 # AWS PERMISSION REQUIRED: DynamoDB read/write access
 # boto3 will automatically use EC2 IAM role credentials (no explicit credentials passed)
@@ -79,12 +79,7 @@ messages_table = dynamodb.Table(
 # AWS PERMISSION REQUIRED: SNS Publish access
 # boto3 will automatically use EC2 IAM role credentials (no explicit credentials passed)
 sns_client = boto3.client("sns", region_name=AWS_REGION)
-# SNS Topic ARN for Blood Request Notifications
-# Account: 904233124678, Region: us-east-1
-SNS_TOPIC_ARN = os.environ.get(
-    "BLOOD_REQUEST_SNS_TOPIC_ARN",
-    "arn:aws:sns:us-east-1:904233124678:sns_topic:d0354386-8de3-40fe-a949-a28c74e35a29"
-)
+SNS_TOPIC_ARN = os.environ.get("BLOOD_REQUEST_SNS_TOPIC_ARN")
 
 # -------------------- LOGGING CONFIGURATION --------------------
 # CloudWatch logging removed - now using standard Python logging to stdout/stderr
@@ -747,12 +742,6 @@ def contact():
 def logout():
     session.clear()
     return redirect(url_for('index'))
-
-
-if __name__ == '__main__':
-    # Bind to 0.0.0.0 so the app is reachable on EC2.
-    # In production, disable debug and run behind a WSGI server like gunicorn.
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=bool(os.environ.get("FLASK_DEBUG", False)), use_reloader=False)
 
 
 if __name__ == '__main__':
